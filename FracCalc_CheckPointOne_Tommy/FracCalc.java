@@ -31,6 +31,8 @@ public class FracCalc {
     //        
     // The function should return the result of the fraction after it has been calculated
     //      e.g. return ==> "1_1/4"
+    
+    //This method separtes the first operand, the operator, and the second operand
     public static String produceAnswer(String userInput)
     { 
         // TODO: Implement this function to produce the solution to the input
@@ -59,13 +61,14 @@ public class FracCalc {
         }
         secondOperand = userInput.substring(firstIndex, lastIndex - 1);
         
-        secondOperand = parsingFractions(secondOperand);
+        return parsingFractions(secondOperand);
         
-        return secondOperand;
+        //This is just parsing the fraction for the first operand, it doesn't print anything
+        //firstOperand = parsingFractions(firstOperand);
     }
     
-    
-    public static void parsingFractions(String operand){
+    //This method parse operands
+    public static String parsingFractions(String operand){
         String wholeString;
         String numeratorString;
         String denominatorString;
@@ -76,13 +79,18 @@ public class FracCalc {
         
         if(operand.indexOf('_') == -1){
             if(operand.indexOf('/') == -1){
-                numberator = 0;
+                whole = Integer.parseInt(operand.substring(0,operand.length()));
+                numerator = 0;
                 denominator = 1;
             } else {
                 whole = 0;
+                numerator = Integer.parseInt(operand.substring(0,operand.indexOf('/')));
+                denominator = Integer.parseInt(operand.substring(operand.indexOf('/')+1,operand.length()));
             }
         } else {
-            operand.substring(0,operand.indexOf('_'));
+            whole = Integer.parseInt(operand.substring(0,operand.indexOf('_')));
+            numerator = Integer.parseInt(operand.substring(operand.indexOf('_')+1, operand.indexOf('/')));
+            denominator = Integer.parseInt(operand.substring(operand.indexOf('/')+1,operand.length()));
         }
         
         parsedFraction = "whole:" + whole + " numerator:" + numerator + " denominator:" + denominator;
